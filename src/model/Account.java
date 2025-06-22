@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import exceptions.*;
 
 public class Account {
@@ -8,6 +11,12 @@ public class Account {
 	private float balance;
 	private Customer customer;
 	private String accType;
+	private List<Transaction> transactions = new ArrayList<>();
+	
+	public List<Transaction> getTransactions()
+	{
+		return transactions;
+	}
 	
 	public int getAccountNum() {
 		return accountNum;
@@ -38,6 +47,7 @@ public class Account {
 		this.balance = 0;
 		this.customer = customer;
 		this.accType = accType;
+		this.transactions = new ArrayList<>();
 	}
 	public Account(Account a) {
 		this.accountNum = a.accountNum;
@@ -76,6 +86,7 @@ public class Account {
 			throw new InvalidAmountException("amount should be more than 0 !");
 		}
 		balance += amount;
+		
 	}
 	
 	@Override
