@@ -1,13 +1,12 @@
 package model;
 
-import exceptions.InsufficientBalanceException;
-import exceptions.InvalidAmountException;
+import exceptions.*;
 
 public class Account {
 	
 	private int accountNum;
 	private float balance;
-	private String customer;
+	private Customer customer;
 	private String accType;
 	
 	public int getAccountNum() {
@@ -18,11 +17,11 @@ public class Account {
 		this.accountNum = accountNum;
 	}
 
-	public String getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(String customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
@@ -34,11 +33,17 @@ public class Account {
 		this.accType = accType;
 	}
 
-	public Account(int accountNum, String customer, String accType) {
+	public Account(int accountNum, Customer customer, String accType) {
 		this.accountNum = accountNum;
 		this.balance = 0;
 		this.customer = customer;
 		this.accType = accType;
+	}
+	public Account(Account a) {
+		this.accountNum = a.accountNum;
+		this.balance = a.balance;
+		this.customer = a.customer;
+		this.accType = a.accType;
 	}
 
 	public float getBalance()
@@ -76,10 +81,10 @@ public class Account {
 	@Override
 	public String toString() {
 	    return "Account{" +
-	           "accountNum=" + accountNum +
+	           "account Number=" + accountNum +
 	           ", balance=" + balance +
 	           ", customer='" + customer + '\'' +
-	           ", accType='" + accType + '\'' +
+	           ", account Type='" + accType + '\'' +
 	           '}';
 	}
 }
