@@ -14,6 +14,19 @@ public class Customer {
 		this.contactInfo = contactInfo;
 		this.accounts = new ArrayList<>();
 	}
+	public Customer() {
+	    this.name = "";
+	    this.customerId = 0; // or a default value
+	    this.contactInfo = "";
+	    this.accounts = new ArrayList<>();
+	}
+
+	public Customer(String name, int customerId, String contactInfo, List<Account> accounts) {
+		this.name = name;
+		this.customerId = customerId;
+		this.contactInfo = contactInfo;
+		this.accounts = accounts;
+	}
 	public String getName() {
 		return name;
 	}

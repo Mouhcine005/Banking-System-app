@@ -17,4 +17,7 @@ import java.util.List;
 		List<Transaction> getTransactions();
 		List<Transaction> getTransactions(int accNum);
 		List<Account> getAccounts(int customerId);
+		
+		
+		public void linkData(List<Customer> customers, List<Account> accounts, List<Transaction> transactions);
 }

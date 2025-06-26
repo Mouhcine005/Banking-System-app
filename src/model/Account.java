@@ -42,6 +42,22 @@ public class Account {
 		this.accType = accType;
 	}
 
+	public Account() {
+	    this.accountNum = 0;
+	    this.balance = 0.0f;
+	    this.customer = null;
+	    this.accType = "";
+	    this.transactions = new ArrayList<>();
+	}
+	public Account(int accountNum, float balance, Customer customer, String accType, List<Transaction> transactions) {
+		super();
+		this.accountNum = accountNum;
+		this.balance = balance;
+		this.customer = customer;
+		this.accType = accType;
+		this.transactions = transactions;
+	}
+
 	public Account(int accountNum, Customer customer, String accType) {
 		this.accountNum = accountNum;
 		this.balance = 0;
