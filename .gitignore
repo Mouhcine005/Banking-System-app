@@ -1,4 +1,7 @@
-/bin/
-/.settings/
-/.classpath
-/.project
+bin/
+.settings/
+.classpath
+.project
+/data/accounts_filled.csv
+/data/customers_filled.csv
+/data/transactions_filled.csv

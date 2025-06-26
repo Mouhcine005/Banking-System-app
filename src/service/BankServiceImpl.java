@@ -118,4 +118,27 @@ public class BankServiceImpl implements BankService{
 	    System.out.println("Customer with ID " + customerId + " not found!");
 	    return new ArrayList<>();
 	}
+	
+	@Override
+	 public void linkData(List<Customer> customers, List<Account> accounts, List<Transaction> transactions) {
+	        for (Account acc : accounts) {
+	            for (Customer cust : customers) {
+	                if (acc.getCustomer().getCustomerId() == cust.getCustomerId()) {
+	                    acc.setCustomer(cust);
+	                    cust.addAcc(acc);
+	                    break;
+	                }
+	            }
+	        }
+
+	        for (Transaction tr : transactions) {
+	            for (Account acc : accounts) {
+	                if (tr.getAccNum() == acc.getAccountNum()) {
+	                    acc.getTransactions().add(tr);
+	                    break;
+	                }
+	            }
+	        }
+	    }
+
 }
