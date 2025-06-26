@@ -2,6 +2,6 @@ bin/
 .settings/
 .classpath
 .project
-/data/accounts_filled.csv
-/data/customers_filled.csv
-/data/transactions_filled.csv
+src/data/accounts_filled.csv
+src/data/customers_filled.csv
+src/data/transactions_filled.csv
