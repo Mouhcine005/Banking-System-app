@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.*;
+import fileManager.*;
 import model.*;
 public class BankServiceImpl implements BankService{
 	 
@@ -14,10 +15,48 @@ public class BankServiceImpl implements BankService{
     private List<Customer> customers = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
     
+    public BankServiceImpl() {
+        try {
+            this.customers = CustomerFileManager.readCustomers();
+            List<Account> accounts = AccountFileManager.readAccounts();
+            this.transactions = TransactionFileManager.readTransactions();
+
+            linkData(customers, accounts, transactions);
+
+            // Update ID counters
+            for (Account acc : accounts) {
+                if (acc.getAccountNum() >= nextAccountNumber) {
+                    nextAccountNumber=acc.getAccountNum()+1;
+                }
+            }
+            for (Transaction t : transactions) {
+                if (t.getTransactionId() >= nextTransactionId) {
+                    nextTransactionId=t.getTransactionId()+1;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error initializing BankService: " + e.getMessage());
+        }
+    }
+    @Override
+    public List<Account> getAllAccounts() {
+        List<Account> all = new ArrayList<>();
+        for (Customer c : customers) {
+            all.addAll(c.getAccounts());
+        }
+        return all;
+    }
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customers;
+    }
+
+    
 	@Override
 	public void addCustomer(Customer c)
 	{
 		customers.add(c);
+		CustomerFileManager.writeCustomers(customers);
 	}
 	
 	
@@ -31,6 +70,8 @@ public class BankServiceImpl implements BankService{
 			Account acc = new Account(accNum,c,accType);
 			System.out.println("Account created with Account Number: " + accNum);
 			c.addAcc(acc);
+			CustomerFileManager.writeCustomers(customers);
+			AccountFileManager.writeAccounts(getAllAccounts());
 		}
 		else {
 	        System.out.println("Customer not found.");
@@ -59,11 +100,14 @@ public class BankServiceImpl implements BankService{
 	                Transaction t = new Transaction(nextTransactionId++, accountNum, amount, "Deposit");
 	                acc.getTransactions().add(t);
 	                transactions.add(t);
+	    			AccountFileManager.writeAccounts(getAllAccounts());
+	    			TransactionFileManager.writeTransactions(getAllTransactions());
 	                System.out.println(amount + " added to balance.");
 	                return true;
 	            }
 	        }
 	    }
+	    
 	    System.out.println("Account with number " + accountNum + " not found!");
 	    return false;
 	}
@@ -78,6 +122,8 @@ public class BankServiceImpl implements BankService{
 	            	Transaction t = new Transaction(nextTransactionId++, accountNum, amount, "Withdraw");
 	            	transactions.add(t);
 	            	acc.getTransactions().add(t);
+	    			AccountFileManager.writeAccounts(getAllAccounts());
+	    			TransactionFileManager.writeTransactions(getAllTransactions());
 	                System.out.println(amount + " withdrawn.");
 	                return true;
 	            }
@@ -88,7 +134,7 @@ public class BankServiceImpl implements BankService{
 	}
 	
 	@Override 
-	public List<Transaction> getTransactions()
+	public List<Transaction> getAllTransactions()
 	{
 		return transactions;
 	}
