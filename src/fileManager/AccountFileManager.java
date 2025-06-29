@@ -15,7 +15,7 @@ import model.Transaction;
 
 public class AccountFileManager {
 	
-	 private static final String FILE_PATH = "data/accounts.csv";
+	 private static final String FILE_PATH = "src/data/accounts.csv";
 	
 	public static List<Account> readAccounts() throws FileNotFoundException, IOException
 	{
