@@ -9,14 +9,20 @@ import java.util.List;
 	import model.Transaction;
 	
 	public interface BankService{
+		
+		List<Customer> getAllCustomers();
 		void addCustomer(Customer c);
-		void createAcc(int customerId,String accType);
 		Customer getCustomerById(int id);
+		
+		void createAcc(int customerId,String accType);
+		List<Account> getAllAccounts();
+		List<Account> getAccounts(int customerId);
+		
 		boolean deposit(int accountNum, float amount) throws InvalidAmountException;
 		boolean withdraw(int accountNum,float amount) throws InsufficientBalanceException, InvalidAmountException;
-		List<Transaction> getTransactions();
+		List<Transaction> getAllTransactions();
 		List<Transaction> getTransactions(int accNum);
-		List<Account> getAccounts(int customerId);
+
 		
 		
 		public void linkData(List<Customer> customers, List<Account> accounts, List<Transaction> transactions);
