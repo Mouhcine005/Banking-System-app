@@ -14,7 +14,7 @@ import model.Customer;
 
 public class CustomerFileManager {
 
-	 private static final String FILE_PATH = "data/customers.csv";
+	 private static final String FILE_PATH = "src/data/customers.csv";
 
 		private static String customerToCSV(Customer customer) {
 		    String accountsStr = customer.getAccounts().stream()

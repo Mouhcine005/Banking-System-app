@@ -7,7 +7,7 @@ import exceptions.*;
 import fileManager.*;
 import model.*;
 public class BankServiceImpl implements BankService{
-	 
+	private static int nextCustomerId = 1; //you can change it with whatever value you want !
 	private static int nextAccountNumber = 1; //you can change it with whatever value you want !
 	private static int nextTransactionId = 1; //you can change it with whatever value you want !
 	
@@ -24,6 +24,12 @@ public class BankServiceImpl implements BankService{
             linkData(customers, accounts, transactions);
 
             // Update ID counters
+            for (Customer cust : customers) {
+                if (cust.getCustomerId() >= nextCustomerId) {
+                    nextCustomerId = cust.getCustomerId() + 1;
+                }
+            }
+            
             for (Account acc : accounts) {
                 if (acc.getAccountNum() >= nextAccountNumber) {
                     nextAccountNumber=acc.getAccountNum()+1;
@@ -55,6 +61,7 @@ public class BankServiceImpl implements BankService{
 	@Override
 	public void addCustomer(Customer c)
 	{
+		c.setCustomerId(nextCustomerId++);
 		customers.add(c);
 		CustomerFileManager.writeCustomers(customers);
 	}
