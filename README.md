@@ -20,7 +20,7 @@ This project demonstrates basic banking operations such as creating accounts, pe
 
 ## Usage
 
-- Use the provided interface or command-line prompts to create accounts and perform transactions.  
+- Use the command-line prompts to create accounts and perform transactions.  
 - Account and transaction data are stored in CSV files located in the `src/data` directory.  
 - Modify CSV files directly for manual updates if needed (be cautious with formatting).
 
